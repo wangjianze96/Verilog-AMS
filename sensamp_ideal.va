@@ -1,0 +1,17 @@
+// Verilog-A model for an ideal voltage mode sense amplifier
+
+`include "disciplines.vams"
+`include "constants.vams"
+
+module sensamp_ideal (vdd, se, in, ref, out);
+
+  electrical vdd, se, in, ref, out;
+  inout vdd, se, in, ref, out;
+  
+  if (se) begin
+    if (V(in) > V(ref)) V(out) <+ V(vdd);
+    else V(out) <+ 0;
+  end
+  else V(out) <+ V(vdd);
+
+endmodule
